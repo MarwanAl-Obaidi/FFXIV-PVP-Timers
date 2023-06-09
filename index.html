@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Repeating Events</title>
+    <script>
+        // Function to update the events at 6 PM every day
+        function updateEvents() {
+            var date = new Date();
+            var hours = date.getHours();
+
+            // Check if it's 6 PM
+            if (hours === 18) {
+                var events = ["Shatter", "Seize", "Onsal"];
+                var eventList = document.getElementById("event-list");
+                eventList.innerHTML = ""; // Clear the existing event list
+
+                // Create new list items for each event
+                events.forEach(function (event) {
+                    var listItem = document.createElement("li");
+                    listItem.textContent = event;
+                    eventList.appendChild(listItem);
+                });
+            }
+
+            // Schedule the next update
+            setTimeout(updateEvents, 60000); // Check every minute
+        }
+
+        // Start the initial update when the page loads
+        window.onload = function () {
+            updateEvents();
+        };
+    </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Repeating Events</h1>
+    <ul id="event-list">
+        <li>Shatter</li>
+        <li>Seize</li>
+        <li>Onsal</li>
+    </ul>
+</body>
+
+</html>
