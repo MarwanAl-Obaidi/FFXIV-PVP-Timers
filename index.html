@@ -4,27 +4,57 @@
 <head>
     <title>Repeating Events</title>
     <script>
-        // Function to update the events at 6 PM every day
+        // Function to update the events and time of change for the next 7 days
         function updateEvents() {
-            var date = new Date();
-            var hours = date.getHours();
+            var eventList = document.getElementById("event-list");
+            eventList.innerHTML = ""; // Clear the existing event list
 
-            // Check if it's 6 PM
-            if (hours === 18) {
+            var currentDate = new Date();
+            var currentHour = currentDate.getHours();
+
+            // Get the next 7 days
+            for (var i = 0; i < 7; i++) {
+                var nextDate = new Date(currentDate);
+                nextDate.setDate(currentDate.getDate() + i);
+
                 var events = ["Shatter", "Seize", "Onsal"];
-                var eventList = document.getElementById("event-list");
-                eventList.innerHTML = ""; // Clear the existing event list
+                var eventChangeHour = 18; // Events change at 6 PM
 
-                // Create new list items for each event
-                events.forEach(function (event) {
-                    var listItem = document.createElement("li");
-                    listItem.textContent = event;
-                    eventList.appendChild(listItem);
-                });
+                if (nextDate.getDate() === currentDate.getDate() && currentHour >= eventChangeHour) {
+                    // Skip the current day if the event change hour has already passed
+                    continue;
+                }
+
+                var listItem = document.createElement("li");
+                var eventDate = formatDate(nextDate);
+                var eventTime = formatTime(eventChangeHour);
+                var eventText = events[i % events.length];
+                listItem.textContent = eventText + " (Change at " + eventTime + " on " + eventDate + ")";
+                eventList.appendChild(listItem);
             }
 
             // Schedule the next update
             setTimeout(updateEvents, 60000); // Check every minute
+        }
+
+        // Helper function to format the date as "Day, Month Date"
+        function formatDate(date) {
+            var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+            var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+            var day = days[date.getDay()];
+            var month = months[date.getMonth()];
+            var dateNum = date.getDate();
+
+            return day + ", " + month + " " + dateNum;
+        }
+
+        // Helper function to format the time as "HH:MM AM/PM"
+        function formatTime(hours) {
+            var amPm = hours >= 12 ? "PM" : "AM";
+            var formattedHours = hours % 12 || 12;
+
+            return formattedHours + ":00 " + amPm;
         }
 
         // Start the initial update when the page loads
@@ -57,9 +87,7 @@
 <body>
     <h1>Repeating Events</h1>
     <ul id="event-list">
-        <li>Shatter</li>
-        <li>Seize</li>
-        <li>Onsal</li>
+        <!-- Events will be dynamically added here -->
     </ul>
 </body>
 
