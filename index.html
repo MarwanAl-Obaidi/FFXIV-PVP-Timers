@@ -4,7 +4,7 @@
 <head>
     <title>Repeating Events</title>
     <script>
-        // Function to update the events and time of change for the next 7 days
+        // Function to update the events and time of change for the next 30 days
         function updateEvents() {
             var eventList = document.getElementById("event-list");
             eventList.innerHTML = ""; // Clear the existing event list
@@ -15,14 +15,14 @@
             // Get today's event
             var events = ["Shatter", "Seize", "Onsal"];
             var eventChangeHour = 18; // Events change at 6 PM
-            var todayEvent = events[currentDate.getDay() % events.length];
+            var todayEvent = events[currentDate.getDate() % events.length];
 
             var listItem = document.createElement("li");
             listItem.textContent = "Today's Event: " + todayEvent;
             eventList.appendChild(listItem);
 
-            // Get the next 7 days
-            for (var i = 1; i <= 7; i++) {
+            // Get the next 30 days
+            for (var i = 1; i <= 30; i++) {
                 var nextDate = new Date(currentDate);
                 nextDate.setDate(currentDate.getDate() + i);
 
@@ -34,7 +34,7 @@
                 var listItem = document.createElement("li");
                 var eventDate = formatDate(nextDate);
                 var eventTime = formatTime(eventChangeHour);
-                var eventText = events[(currentDate.getDay() + i) % events.length];
+                var eventText = events[(currentDate.getDate() + i) % events.length];
                 listItem.textContent = eventText + " (Change at " + eventTime + " on " + eventDate + ")";
                 eventList.appendChild(listItem);
             }
