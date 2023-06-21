@@ -3,6 +3,64 @@
 
 <head>
     <title>Repeating Events</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        li::before {
+            content: "➤";
+            /* Use any preferred symbol or icon */
+            margin-right: 10px;
+        }
+
+        li:first-child {
+            font-weight: bold;
+        }
+
+        li:nth-child(odd) {
+            background-color: #f2f2f2;
+            /* Alternate background color for better readability */
+        }
+
+        /* Assign different colors to each event type */
+        li.event-seize {
+            color: #ff0000;
+            /* Red */
+        }
+
+        li.event-shatter {
+            color: #00ff00;
+            /* Green */
+        }
+
+        li.event-onsal {
+            color: #0000ff;
+            /* Blue */
+        }
+
+        /* Optional hover effect on list items */
+        li:hover {
+            background-color: #e6e6e6;
+            cursor: pointer;
+        }
+    </style>
     <script>
         // Function to update the events and time of change for the next 30 days
         function updateEvents() {
@@ -13,7 +71,7 @@
             var currentHour = currentDate.getHours();
 
             // Get today's event
-            var events = ["Shatter", "Seize", "Onsal"];
+            var events = ["Seize", "Shatter", "Onsal"];
             var eventChangeHour = 18; // Events change at 6 PM
             var todayEvent = events[currentDate.getDate() % events.length];
 
@@ -36,6 +94,16 @@
                 var eventTime = formatTime(eventChangeHour);
                 var eventText = events[(currentDate.getDate() + i) % events.length];
                 listItem.textContent = eventText + " (Change at " + eventTime + " on " + eventDate + ")";
+
+                // Assign the appropriate CSS class based on the event type
+                if (eventText === "Seize") {
+                    listItem.classList.add("event-seize");
+                } else if (eventText === "Shatter") {
+                    listItem.classList.add("event-shatter");
+                } else if (eventText === "Onsal") {
+                    listItem.classList.add("event-onsal");
+                }
+
                 eventList.appendChild(listItem);
             }
 
@@ -68,26 +136,6 @@
             updateEvents();
         };
     </script>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-
-        h1 {
-            text-align: center;
-        }
-
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        li {
-            margin-bottom: 10px;
-            font-size: 18px;
-        }
-    </style>
 </head>
 
 <body>
