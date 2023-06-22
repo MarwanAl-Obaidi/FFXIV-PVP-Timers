@@ -7,6 +7,7 @@
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
+            background-color: #f7f7f7;
         }
 
         h1 {
@@ -22,6 +23,10 @@
         li {
             margin-bottom: 10px;
             font-size: 18px;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
         li::before {
@@ -30,34 +35,23 @@
             margin-right: 10px;
         }
 
-        li:first-child {
-            font-weight: bold;
-        }
-
-        li:nth-child(odd) {
-            background-color: #f2f2f2;
-            /* Alternate background color for better readability */
-        }
-
-        /* Assign different colors to each event type */
         li.event-seize {
-            color: #ff0000;
+            color: #ff5555;
             /* Red */
         }
 
         li.event-shatter {
-            color: #00ff00;
+            color: #55aa55;
             /* Green */
         }
 
         li.event-onsal {
-            color: #0000ff;
+            color: #5555ff;
             /* Blue */
         }
 
-        /* Optional hover effect on list items */
         li:hover {
-            background-color: #e6e6e6;
+            background-color: #f2f2f2;
             cursor: pointer;
         }
     </style>
@@ -77,6 +71,7 @@
 
             var listItem = document.createElement("li");
             listItem.textContent = "Today's Event: " + todayEvent;
+            listItem.classList.add("event-" + todayEvent.toLowerCase());
             eventList.appendChild(listItem);
 
             // Get the next 30 days
@@ -94,16 +89,7 @@
                 var eventTime = formatTime(eventChangeHour);
                 var eventText = events[(currentDate.getDate() + i) % events.length];
                 listItem.textContent = eventText + " (Change at " + eventTime + " on " + eventDate + ")";
-
-                // Assign the appropriate CSS class based on the event type
-                if (eventText === "Seize") {
-                    listItem.classList.add("event-seize");
-                } else if (eventText === "Shatter") {
-                    listItem.classList.add("event-shatter");
-                } else if (eventText === "Onsal") {
-                    listItem.classList.add("event-onsal");
-                }
-
+                listItem.classList.add("event-" + eventText.toLowerCase());
                 eventList.appendChild(listItem);
             }
 
