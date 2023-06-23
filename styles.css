@@ -1,0 +1,50 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #f7f7f7;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 10px;
+    font-size: 18px;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+li::before {
+    content: "➤";
+    /* Use any preferred symbol or icon */
+    margin-right: 10px;
+}
+
+li.event-seize {
+    color: #ff5555;
+    /* Red */
+}
+
+li.event-shatter {
+    color: #55aa55;
+    /* Green */
+}
+
+li.event-onsal {
+    color: #5555ff;
+    /* Blue */
+}
+
+li:hover {
+    background-color: #f2f2f2;
+    cursor: pointer;
+}
