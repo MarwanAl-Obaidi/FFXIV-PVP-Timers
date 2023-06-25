@@ -9,9 +9,8 @@ h1 {
     color: #333;
 }
 
-h2 {
-    text-align: center;
-    color: #333;
+.event-container {
+    display: flex;
 }
 
 ul {
@@ -49,14 +48,23 @@ li.event-onsal {
     /* Blue */
 }
 
+li.event-cc {
+    color: #ff9900;
+    /* Orange */
+}
+
 li:hover {
     background-color: #f2f2f2;
     cursor: pointer;
 }
 
+.event-list-cc {
+    margin-left: 20px;
+}
+
 footer {
     text-align: center;
-    margin-top: 20px;
+    margin-top: 10px;
     font-size: 14px;
     color: #888;
 }
